@@ -19,5 +19,5 @@ const port = process.env.PORT || 3000
 app.get('/', (req, res) =>  HomeControllerInstance.compute(req, res))
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })
