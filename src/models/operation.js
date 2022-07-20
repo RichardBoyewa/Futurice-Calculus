@@ -6,7 +6,7 @@ class Operation {
         this.LHS = []
         this.RHS = []
     }
-    // Returns the total let of this operation
+    // Returns the total length of this operation's expression
     getLen () {
         return this.LHS.length + this.RHS.length + 1 // operator
     }

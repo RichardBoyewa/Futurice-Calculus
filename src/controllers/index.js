@@ -21,7 +21,6 @@ class HomeController {
         } catch (error) {
             return response.json(this.httpResponse.error(error))
         }
-        
         return response.json(this.httpResponse.error('Unable to compute this :-('))
     }
 }

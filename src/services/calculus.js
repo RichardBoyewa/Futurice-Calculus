@@ -10,10 +10,14 @@ class CalculusService {
 
     compute(input) {
         if(!input) { throw 'Invalid input'}
+        // Strip off extra / unwanted space
         const treatedInput = input.replace(/\s/g, '',).split('');
         let preparedData = this.prepareExpression(treatedInput)
+        // Handle special cases of -ve values. Knowing -x = - (+x)
         preparedData = this.normaliseExpression(preparedData)
+        // Recursively apply BODMAS on the simplified linear expression
         const f = this.applyBODMAS(preparedData, 0)
+        // At the end of this, we expect a single result if expression execute correctly
         if (f && f.length == 1) {
             return f[0]
         } else {
@@ -100,7 +104,6 @@ class CalculusService {
     }
 
     calculateExpressionOperations(opInstance) {
-        // Lone item, so we return it
         if (opInstance.LHS.length == 0) {
             throw 'Invalid operation'
         }
@@ -112,10 +115,11 @@ class CalculusService {
             if (opInstance.RHS.length != 0) {
                 throw 'Invalid operation - second operand not specified'
             }
+            // Lone item, so we return it
             return Number(opInstance.LHS.join(''))
         }
 
-        // Operator not found, usually this should have LHS OPERATOR RHS form
+        // Operator found, usually this should have LHS OPERATOR RHS form
         if (opInstance.operator) {
             if (opInstance.LHS.length == 0) {
                 throw 'Invalid operation - first operand missing'
